@@ -11,11 +11,11 @@ import 'package:progressions/models/Notes.dart';
 import 'package:progressions/models/ScaleSelection.dart';
 import 'package:provider/provider.dart';
 
-import 'AppTitle.dart';
+import 'KnowledgeBaseTitle.dart';
 import 'KeySelectorWidget.dart';
 import 'ModeSelectorWidget.dart';
 
-class HomePage extends StatelessWidget {
+class KnowledgeBasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppTitle(),
+                KnowledgeBaseTitle(),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,

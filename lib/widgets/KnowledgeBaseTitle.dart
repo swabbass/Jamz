@@ -4,8 +4,8 @@ import 'package:progressions/models/ScaleSelection.dart';
 import 'package:progressions/widgets/StyledTitleText.dart';
 import 'package:provider/provider.dart';
 
-class AppTitle extends StatelessWidget {
-  const AppTitle({
+class KnowledgeBaseTitle extends StatelessWidget {
+  const KnowledgeBaseTitle({
     Key? key,
   }) : super(key: key);
 
@@ -16,7 +16,7 @@ class AppTitle extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          StyledText("Progressions",
+          StyledText("Knowledge Base",
               TextStyle(fontWeight: FontWeight.w900, fontSize: 24)),
           Consumer<SelectedScaleNotifier>(
             builder: (context, scaleSelection, child) {
