@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:progressions/widgets/HomePage.dart';
+import 'package:progressions/widgets/KnowledgeBasePage.dart';
+
+import 'widgets/jam/CreateJamScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
 
-      home: HomePage(),
+      home: CreateJamScreen(),
     );
   }
 }
