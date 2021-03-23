@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:progressions/widgets/StyledTitleText.dart';
 import 'package:progressions/widgets/common/AppTitle.dart';
 import 'package:progressions/widgets/common/PopupMenuWidget.dart';
+import 'package:progressions/widgets/jam/BeatWidget.dart';
 
 class CreateJamScreen extends StatelessWidget {
   static const int _MAX_BARS = 4;
@@ -22,6 +23,18 @@ class CreateJamScreen extends StatelessWidget {
               title: "Create a Jam",
             ),
             BarsSelection(barsSelectionOptions: barsSelectionOptions),
+            Row(
+              children: [
+                BeatWidget(),
+                BeatWidget(),
+                BeatWidget(),
+                BeatWidget(),
+                BeatWidget(),
+                BeatWidget(),
+                BeatWidget(),
+                BeatWidget(),
+              ],
+            )
           ],
         ),
       ),
