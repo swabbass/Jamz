@@ -43,15 +43,51 @@ class CreateJamScreen extends StatelessWidget {
               AppTitle(
                 title: "Create a Jam",
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  BarsSelection(barsSelectionOptions: barsSelectionOptions),
-                  KeySelectorWidget(),
-                  ModeSelectorWidget()
-                ],
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 32,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    BarsSelection(barsSelectionOptions: barsSelectionOptions),
+                    KeySelectorWidget(),
+                    ModeSelectorWidget()
+                  ],
+                ),
               ),
-              ChordsGrid(chordsSelection: chordsSelection),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 32,
+                ),
+                child: ChordsGrid(chordsSelection: chordsSelection),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 32,
+                ),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 100,
+                  color: Colors.red.shade300,
+                  child: Center(
+                    child: StyledText(
+                        "Recording goes "
+                        "here!",
+                        TextStyle()),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 32),
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  FloatingActionButton.extended(
+                      backgroundColor: Colors.blueAccent.shade400,
+                      onPressed: () => null,
+                      label: StyledText("Sharing is caring!", TextStyle())),
+                ]),
+              )
             ],
           ),
         ),
