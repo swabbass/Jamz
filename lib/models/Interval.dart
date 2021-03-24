@@ -2,7 +2,7 @@ import 'package:progressions/models/Modes.dart';
 
 final _intervalModesNames = ["P", "M", "m"];
 enum IntervalMode{P,M,m,A,d}
-const  IntervalNames = ["","","min","aug","dim"];
+const  IntervalNames = ["","","m","aug","dim"];
 //
 // final MODE_INTERVALS = Map.fromIterable([
 //  ModeType.Ionian
