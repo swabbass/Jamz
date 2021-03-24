@@ -36,12 +36,8 @@ class KeySelectorWidget extends StatelessWidget {
         itemBuilder: (BuildContext context) => Note.values
             .map((e) => PopupMenuItem<Note>(
                   value: e,
-                  child: Container(
-                    child: Center(
-                      child: StyledText(NOTES_NAMES[e.index],
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
-                    ),
-                  ),
+                  child: StyledText(NOTES_NAMES[e.index],
+                      TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
                 ))
             .toList());
   }
