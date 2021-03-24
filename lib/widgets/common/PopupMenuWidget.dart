@@ -27,11 +27,12 @@ class PopupMenu<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton<T>(
         onSelected: (T t) {
+          print("ffff $t");
           this._onSelected?.call(t, this._data.indexOf(t));
         },
         child: Card(
           child: Padding(
-            padding: const EdgeInsets.all(4.0),
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
                 StyledText(
