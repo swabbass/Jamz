@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1095180533926",
+    "project_id": "jamz-36c2c",
+    "storage_bucket": "jamz-36c2c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095180533926:android:c39707b96994349c53f467",
+        "android_client_info": {
+          "package_name": "com.ward.progressions"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1095180533926-uedv8m16cjuqb7tq6nbja0qp0f27d56h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ward.progressions",
+            "certificate_hash": "513f64f5a1b7046903cb565129539f3ed8661ab8"
+          }
+        },
+        {
+          "client_id": "1095180533926-uun5o0mv0tsdik1ekpn9mn2bplkf8k5s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEpeLlVI-LxgteelpTOWDKeuDxR9OC1_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1095180533926-uun5o0mv0tsdik1ekpn9mn2bplkf8k5s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
