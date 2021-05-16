@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progressions/models/authentication.dart';
+import 'package:progressions/widgets/jam/CreateJamScreen.dart';
+import 'package:progressions/widgets/login/HomeScreen.dart';
 import 'package:progressions/widgets/login/sign_in_screen.dart';
 
 import '../StyledTitleText.dart';
@@ -54,8 +56,10 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Color(0xFF414141),
-        title: StyledText(_user.displayName! + " in Jamz",
-            TextStyle(fontWeight: FontWeight.w900, fontSize: 22)),
+        // title: StyledText(_user.displayName! + " in Jamz",
+        //     TextStyle(fontWeight: FontWeight.w900, fontSize: 22)),
+        title: StyledText(
+            "Jamz", TextStyle(fontWeight: FontWeight.w900, fontSize: 32)),
       ),
       body: SafeArea(
         child: Padding(
@@ -176,6 +180,45 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          children: [
+            SizedBox(
+              width: 50.0,
+            ),
+            IconButton(
+              icon: Icon(Icons.home_outlined),
+              iconSize: 30.0,
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                      builder: (context) => HomeScreen(user: _user)),
+                );
+              },
+            ),
+            Spacer(),
+            SizedBox(
+              width: 15.0,
+            ),
+            IconButton(
+              icon: Icon(Icons.favorite),
+              iconSize: 30.0,
+              onPressed: () => print("favorite pressed"),
+            ),
+            SizedBox(
+              width: 50.0,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => CreateJamScreen()),
+            );
+          }),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
