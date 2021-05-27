@@ -17,9 +17,9 @@ class SelectedScaleNotifier with ChangeNotifier {
     this._sharps = sharps;
   }
 
-  Scale? get selectedScale => _selectedScale;
+  Scale get selectedScale => _selectedScale!;
 
-  Note? get selectedKey => _selectedKey;
+  Note get selectedKey => _selectedKey!;
 
   ScaleMode? get selectedMode => _selectedMode;
 

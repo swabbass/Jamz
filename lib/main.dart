@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:progressions/widgets/KnowledgeBasePage.dart';
 
 import 'widgets/jam/CreateJamScreen.dart';
 

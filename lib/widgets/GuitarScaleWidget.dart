@@ -19,13 +19,11 @@ class GuitarScaleWidgetState extends State<GuitarScaleWidget> with SingleTickerP
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       physics: BouncingScrollPhysics(),

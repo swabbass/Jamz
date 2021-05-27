@@ -5,7 +5,6 @@ import 'package:progressions/widgets/ScaleChordsListView.dart';
 import 'package:progressions/widgets/ScaleNotesListView.dart';
 import 'package:progressions/widgets/StyledTitleText.dart';
 import 'package:progressions/widgets/TriadWidget.dart';
-import 'package:progressions/models/Chord.dart';
 import 'package:progressions/models/Modes.dart';
 import 'package:progressions/models/Notes.dart';
 import 'package:progressions/models/ScaleSelection.dart';
@@ -18,7 +17,6 @@ import 'ModeSelectorWidget.dart';
 class KnowledgeBasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
         child: SafeArea(

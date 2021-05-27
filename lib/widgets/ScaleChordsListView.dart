@@ -14,7 +14,7 @@ class ScaleChordsListView extends StatelessWidget {
       builder: (context, scaleSelection, child) {
         return ListView(
           scrollDirection: Axis.horizontal,
-          children: scaleSelection.selectedScale!.chords
+          children: scaleSelection.selectedScale.chords
               .map((e) => ScaleChordWidget(
                     chord: e,
             keyRoot: scaleSelection.selectedKey,

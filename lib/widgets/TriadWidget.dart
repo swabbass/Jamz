@@ -18,7 +18,7 @@ class TriadWidget extends StatelessWidget {
     final provider = Provider.of<SelectedScaleNotifier>(context);
     var tonicTriad = chord != null
         ? chord!.tonicTriad
-        : provider.selectedScale!.chords[0].tonicTriad;
+        : provider.selectedScale.chords[0].tonicTriad;
     final root = keyRoot==null? tonicTriad.root:keyRoot;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
