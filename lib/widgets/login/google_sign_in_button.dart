@@ -1,8 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:progressions/models/user.dart';
 import 'package:progressions/models/authentication.dart';
-import 'package:progressions/widgets/login/user_info_screen.dart';
+import 'package:progressions/widgets/pages/timeline.dart';
+
+final usersRef = FirebaseFirestore.instance.collection('users');
+final Reference storageRef = FirebaseStorage.instance.ref();
+final postsRef = FirebaseFirestore.instance.collection('posts');
+final followersRef = FirebaseFirestore.instance.collection('followers');
+final followingRef = FirebaseFirestore.instance.collection('following');
+final timelineRef = FirebaseFirestore.instance.collection('timeline');
+
+final DateTime timestamp = DateTime.now();
+// AppUser? currentUser;
 
 class GoogleSignInButton extends StatefulWidget {
   @override
@@ -11,6 +24,29 @@ class GoogleSignInButton extends StatefulWidget {
 
 class _GoogleSignInButtonState extends State<GoogleSignInButton> {
   bool _isSigningIn = false;
+
+  createUserInFirestore(User user) async {
+    //check if user exists in users collection in database (according to their id)
+    DocumentSnapshot doc = await usersRef.doc(user.uid).get();
+
+    if (!doc.exists) {
+      usersRef.doc(user.uid).set({
+        "id": user.uid,
+        "username": user.displayName,
+        "photoUrl": user.photoURL,
+        "email": user.email,
+        "bio": "",
+        "timestamp": timestamp
+      });
+
+      //to update doc after adding the user
+      doc = await usersRef.doc(user.uid).get();
+    }
+    // currentUser = AppUser.fromDocument(doc);
+    // print(currentUser);
+    // print(currentUser!.username);
+    // print(postsRef.doc())
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +78,10 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 });
 
                 if (user != null) {
+                  createUserInFirestore(user);
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => UserInfoScreen(
+                      builder: (context) => Timeline(
                         user: user,
                       ),
                     ),
