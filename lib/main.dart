@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:progressions/widgets/KnowledgeBasePage.dart';
-import 'package:progressions/widgets/login/HomeScreen.dart';
 import 'package:progressions/widgets/login/sign_in_screen.dart';
 
 import 'widgets/jam/CreateJamScreen.dart';
