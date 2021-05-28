@@ -1,0 +1,1 @@
+enum ShareState { INITAL, UPLOADING, ERROR, DONE }

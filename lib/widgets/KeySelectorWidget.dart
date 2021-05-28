@@ -10,7 +10,7 @@ class KeySelectorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<SelectedScaleNotifier>(context);
-    Note _selectedNote = provider.selectedKey!;
+    Note _selectedNote = provider.selectedKey;
 
     return PopupMenuButton<Note>(
         child: Card(

@@ -5,6 +5,7 @@ import 'package:progressions/models/Modes.dart';
 import 'Interval.dart';
 import 'Step.dart';
 
+// ignore: non_constant_identifier_names
 final UnmodifiableListView<MusicalStep> IONIAN_NOTE_STEPS =
     UnmodifiableListView([
   MusicalStep.W,
@@ -15,6 +16,7 @@ final UnmodifiableListView<MusicalStep> IONIAN_NOTE_STEPS =
   MusicalStep.W,
   MusicalStep.H
 ]);
+// ignore: non_constant_identifier_names
 final UnmodifiableListView<String> MODE_NAMES = UnmodifiableListView([
   "Ionian",
   "Dorian",
@@ -25,6 +27,7 @@ final UnmodifiableListView<String> MODE_NAMES = UnmodifiableListView([
   "Locrian"
 ]);
 
+// ignore: non_constant_identifier_names
 final IONIAN_INTERVALS = UnmodifiableListView<NoteInterval>([
   NoteInterval(IntervalMode.P, 1),
   NoteInterval(IntervalMode.M, 2),
@@ -36,6 +39,7 @@ final IONIAN_INTERVALS = UnmodifiableListView<NoteInterval>([
   NoteInterval(IntervalMode.P, 8),
 ]);
 
+// ignore: non_constant_identifier_names
 final DORIAN_INTERVALS = UnmodifiableListView<NoteInterval>([
   NoteInterval(IntervalMode.P, 1),
   NoteInterval(IntervalMode.M, 2),
@@ -47,6 +51,7 @@ final DORIAN_INTERVALS = UnmodifiableListView<NoteInterval>([
   NoteInterval(IntervalMode.P, 8),
 ]);
 
+// ignore: non_constant_identifier_names
 final PHRYGIAN_INTERVALS = UnmodifiableListView<NoteInterval>([
   NoteInterval(IntervalMode.P, 1),
   NoteInterval(IntervalMode.m, 2),
@@ -58,6 +63,7 @@ final PHRYGIAN_INTERVALS = UnmodifiableListView<NoteInterval>([
   NoteInterval(IntervalMode.P, 8),
 ]);
 
+// ignore: non_constant_identifier_names
 final LYDIAN_INTERVALS = UnmodifiableListView<NoteInterval>([
   NoteInterval(IntervalMode.P, 1),
   NoteInterval(IntervalMode.M, 2),
@@ -69,6 +75,7 @@ final LYDIAN_INTERVALS = UnmodifiableListView<NoteInterval>([
   NoteInterval(IntervalMode.P, 8),
 ]);
 
+// ignore: non_constant_identifier_names
 final MIXOLYDIAN_INTERVALS = UnmodifiableListView<NoteInterval>([
   NoteInterval(IntervalMode.P, 1),
   NoteInterval(IntervalMode.M, 2),
@@ -80,6 +87,7 @@ final MIXOLYDIAN_INTERVALS = UnmodifiableListView<NoteInterval>([
   NoteInterval(IntervalMode.P, 8),
 ]);
 
+// ignore: non_constant_identifier_names
 final AEOLIAN_INTERVALS = UnmodifiableListView<NoteInterval>([
   NoteInterval(IntervalMode.P, 1),
   NoteInterval(IntervalMode.M, 2),
@@ -91,6 +99,7 @@ final AEOLIAN_INTERVALS = UnmodifiableListView<NoteInterval>([
   NoteInterval(IntervalMode.P, 8),
 ]);
 
+// ignore: non_constant_identifier_names
 final LOCRIAN_INTERVALS = UnmodifiableListView<NoteInterval>([
   NoteInterval(IntervalMode.P, 1),
   NoteInterval(IntervalMode.m, 2),

@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:progressions/widgets/StyledTitleText.dart';
 import 'package:progressions/models/Chord.dart';
 
-import 'ScaleNoteWidget.dart';
 import 'TriadWidget.dart';
 import '../models/Notes.dart';
 
@@ -25,7 +24,7 @@ final Note? keyRoot;
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
             StyledText(
-           chord!.name!, TextStyle(color: Colors.white,
+           chord!.name, TextStyle(color: Colors.white,
             fontWeight: FontWeight.w500,
             fontSize: 18)),
               TriadWidget(chord:chord,keyRoot: keyRoot,)

@@ -9,7 +9,6 @@ const BEAT_SIZE = 48.0;
 
 class BeatWidget extends StatelessWidget {
   final String chord;
-
   final int index;
 
   BeatWidget({required this.chord, required this.index});
@@ -25,14 +24,15 @@ class BeatWidget extends StatelessWidget {
       width: size,
       height: size,
       child: Card(
+        clipBehavior: Clip.antiAlias,
         child: Stack(
           children: [
             Center(child: StyledText(chord, TextStyle(fontSize: fontSize))),
             if (index % BEATS_PER_BAR == 0)
               Padding(
                 padding: const EdgeInsets.all(3.0),
-                child: StyledText("${index+1}", TextStyle(fontSize: 10)),
-              )
+                child: StyledText("${index + 1}", TextStyle(fontSize: 10)),
+              ),
           ],
         ),
       ),

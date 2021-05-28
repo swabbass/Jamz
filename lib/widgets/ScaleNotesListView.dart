@@ -12,7 +12,7 @@ class ScaleNotesListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<SelectedScaleNotifier>(
       builder: (context, scaleSelection, child) {
-        var selectedScale = scaleSelection.selectedScale!;
+        var selectedScale = scaleSelection.selectedScale;
         print("cveveveveveevevevevev");
         print(selectedScale.notes);
         return Row(

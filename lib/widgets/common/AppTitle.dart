@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progressions/widgets/StyledTitleText.dart';
-import 'package:provider/provider.dart';
 
 class AppTitle extends StatelessWidget {
   final String? title;
