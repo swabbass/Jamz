@@ -7,8 +7,16 @@ class Jam {
   final int barCount;
   final int keyIndex;
   final int modeIndex;
+  // final String desc;
   final Map<int, int> chordProg;
 
+  // Jam(this.barCount, this.keyIndex, this.modeIndex, this.chordProg, this.desc);
+  // Map<String, dynamic> toJson() => {
+  //       'barCount': barCount,
+  //       'keyIndex': keyIndex,
+  //       'modeIndex': modeIndex,
+  //       'chordProg': chordProg.map((key, value) => MapEntry("$key", value))
+  //     };
   Jam(this.barCount, this.keyIndex, this.modeIndex, this.chordProg);
   Map<String, dynamic> toJson() => {
         'barCount': barCount,
@@ -21,7 +29,7 @@ class Jam {
       : barCount = json['barCount'],
         keyIndex = json['keyIndex'],
         modeIndex = json['modeIndex'],
-        chordProg = (json['chordProg'] as Map<String, int>)
+        chordProg = (json['chordProg'] as Map<String, dynamic>)
             .map((key, value) => MapEntry(int.parse(key), value));
 
   Note get key => Note.values[keyIndex];

@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:progressions/widgets/KnowledgeBasePage.dart';
 import 'package:progressions/widgets/login/sign_in_screen.dart';
-=======
->>>>>>> ab97150947e1cae8cfeba8e093f4ff8961a24a20
 
 import 'widgets/jam/CreateJamScreen.dart';
 

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:progressions/widgets/pages/activity_feed.dart';
 import 'package:progressions/widgets/pages/user_profile.dart';
 import 'package:progressions/widgets/pages/search.dart';
 import 'package:progressions/widgets/pages/timeline.dart';
@@ -18,7 +19,7 @@ BottomAppBar bottomBar(context, {bool isHome = false, required User user}) {
             iconSize: 30.0,
             onPressed: () {
               if (isHome) {
-                print("Home pressed");
+                // print("Home pressed");
               } else {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => Timeline(user: user)),
@@ -44,10 +45,20 @@ BottomAppBar bottomBar(context, {bool isHome = false, required User user}) {
           width: 15.0,
         ),
         IconButton(
-          icon: Icon(Icons.notifications_active),
-          iconSize: 30.0,
-          onPressed: () => print("notifications pressed"),
-        ),
+            icon: Icon(Icons.notifications_active),
+            iconSize: 30.0,
+            onPressed: () => {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => ActivityFeed(
+                        user: user,
+                      ),
+                    ),
+                  ),
+                }
+            // print("notifications pressed"),
+
+            ),
         SizedBox(
           width: 15.0,
         ),

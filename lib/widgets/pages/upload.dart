@@ -6,19 +6,31 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:progressions/widgets/common/progress.dart';
+import 'package:progressions/widgets/jam/CreateJamScreen.dart';
 import 'package:progressions/widgets/login/google_sign_in_button.dart';
 import 'package:progressions/widgets/pages/test_for_screenshot.dart';
 import 'package:image/image.dart' as Im;
+import 'package:progressions/widgets/pages/timeline.dart';
+import 'package:progressions/widgets/pages/user_profile.dart';
 import 'package:uuid/uuid.dart';
 
 class Upload extends StatefulWidget {
-  Upload({Key? key, required User user, File? file})
+  Upload(
+      {Key? key,
+      required User user,
+      File? file,
+      String? mediaUrl,
+      String? postId})
       : _user = user,
         _file = file,
+        postId = postId,
+        _mediaUrl = mediaUrl,
         super(key: key);
 
   final User _user;
   File? _file;
+  String? postId;
+  String? _mediaUrl;
 
   @override
   _UploadState createState() => _UploadState();
@@ -30,40 +42,44 @@ class _UploadState extends State<Upload> {
   late User _user;
   File? _file;
   bool isUploading = false;
-  String postId = Uuid().v4();
+  late String postId;
+  late String _mediaUrl;
 
   @override
   void initState() {
     _user = widget._user;
     _file = widget._file;
+    postId = widget.postId!;
+    _mediaUrl = widget._mediaUrl!;
     super.initState();
   }
 
-  clearImage() {
+  backToJam() {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => TestForScreenshot(
+        builder: (context) => CreateJamScreen(
               user: _user,
             )));
   }
 
-  compressImage() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(_file!.readAsBytesSync())!;
-    final compressedImageFile = File('$path/img_$postId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
-    setState(() {
-      _file = compressedImageFile;
-    });
-  }
+  // compressImage() async {
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //   Im.Image imageFile = Im.decodeImage(_file!.readAsBytesSync())!;
+  //   final compressedImageFile = File('$path/img_$postId.jpg')
+  //     ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
+  //   setState(() {
+  //     _file = compressedImageFile;
+  //   });
+  // }
 
-  Future<String> uploadImage(imageFile) async {
-    UploadTask uploadTask =
-        storageRef.child("post_$postId.jpg").putFile(imageFile);
+  //save iamge in firestorage in frebase
+  // Future<String> uploadImage(imageFile) async {
+  //   UploadTask uploadTask =
+  //       storageRef.child("post_$postId.jpg").putFile(imageFile);
 
-    String downloadUrl = await (await uploadTask).ref.getDownloadURL();
-    return downloadUrl;
-  }
+  //   String downloadUrl = await (await uploadTask).ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
 
   createPostInFirestore({String? mediaUrl, String? description}) {
     postsRef.doc(widget._user.uid).collection("userPosts").doc(postId).set({
@@ -81,19 +97,20 @@ class _UploadState extends State<Upload> {
     setState(() {
       isUploading = true;
     });
-    await compressImage();
-    String mediaUrl = await uploadImage(_file);
+    // await compressImage();
+    String mediaUrl = _mediaUrl;
+
     createPostInFirestore(
       mediaUrl: mediaUrl,
       description: captionController.text,
     );
     captionController.clear();
     setState(() {
-      //   file = null;
+      // _file = null;
       isUploading = false;
-      postId = Uuid().v4();
+      // postId = Uuid().v4();
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => TestForScreenshot(
+          builder: (context) => Timeline(
                 user: _user,
               )));
     });
@@ -104,7 +121,7 @@ class _UploadState extends State<Upload> {
       appBar: AppBar(
         leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: clearImage),
+            onPressed: backToJam),
         title: Text(
           "Caption Post",
           style: TextStyle(color: Colors.white),
@@ -156,7 +173,7 @@ class _UploadState extends State<Upload> {
                 child: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      fit: BoxFit.cover,
+                      // fit: BoxFit.cover,
                       image: FileImage(_file!),
                     ),
                   ),

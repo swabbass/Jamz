@@ -148,64 +148,47 @@ class _PostState extends State<Post> {
         doc.reference.delete();
       }
     });
-    // delete uploaded image for thep ost
     storageRef.child("post_$postId.jpg").delete();
-    // // then delete all activity feed notifications
-    // QuerySnapshot activityFeedSnapshot = await activityFeedRef
-    //     .document(ownerId)
-    //     .collection("feedItems")
-    //     .where('postId', isEqualTo: postId)
-    //     .getDocuments();
-    // activityFeedSnapshot.documents.forEach((doc) {
-    //   if (doc.exists) {
-    //     doc.reference.delete();
-    //   }
-    // });
-    // then delete all comments
-    // QuerySnapshot commentsSnapshot = await commentsRef
-    //     .document(postId)
-    //     .collection('comments')
-    //     .getDocuments();
-    // commentsSnapshot.documents.forEach((doc) {
-    //   if (doc.exists) {
-    //     doc.reference.delete();
-    //   }
-    // });
   }
-  // handleLikePost() {
-  //   // print("Liked");
-  //   bool _isLiked = likes![ownerId] == true;
-  //   // print("likessss: " + likes![ownerId].toString());
-  //   if (_isLiked) {
-  //     print("DISLiked");
 
-  //     postsRef
-  //         .doc(ownerId)
-  //         .collection('userPosts')
-  //         .doc(postId)
-  //         .update({'likes.$ownerId': false});
-
-  //     setState(() {
-  //       likeCount -= 1;
-  //       isLiked = false;
-  //       likes![ownerId] = false;
-  //     });
-  //   } else if (_isLiked == false) {
-  //     print("Liked");
-
-  //     postsRef
-  //         .doc(ownerId)
-  //         .collection('userPosts')
-  //         .doc(postId)
-  //         .update({'likes.$ownerId': true});
-
-  //     setState(() {
-  //       likeCount += 1;
-  //       isLiked = true;
-  //       likes![ownerId] = true;
-  //     });
-  //   }
+  //TODO Complete method to send to owner notifaction and wait for respond
+  // handleRequestPost(BuildContext parentContext) {
+  //   return ScaffoldMessenger.of(parentContext).showSnackBar(SnackBar(
+  //     content: Text("request to save sent !"),
+  //   ));
   // }
+  addLikeToActivityFeed() {
+    // add a notification to the postOwner's activity feed only if comment made by OTHER user (to avoid getting notification for our own like)
+    bool isNotPostOwner = currentUserId != ownerId;
+
+    if (isNotPostOwner) {
+      activityFeedRef.doc(ownerId).collection("feedItems").doc(postId).set({
+        "type": "like",
+        "username": currentUser!.username,
+        "userId": currentUserId,
+        "userProfileImg": currentUser!.photoUrl,
+        "postId": postId,
+        "mediaUrl": mediaUrl,
+        "timestamp": timestamp,
+      });
+    }
+  }
+
+  removeLikeFromActivityFeed() {
+    bool isNotPostOwner = currentUserId != ownerId;
+    if (isNotPostOwner) {
+      activityFeedRef
+          .doc(ownerId)
+          .collection("feedItems")
+          .doc(postId)
+          .get()
+          .then((doc) {
+        if (doc.exists) {
+          doc.reference.delete();
+        }
+      });
+    }
+  }
 
   buildPostImage() {
     return GestureDetector(
@@ -214,12 +197,13 @@ class _PostState extends State<Post> {
           {
             if (likes![currentUserId] == true)
               {
-                print("DISLiked"),
+                // print("DISLiked"),
                 postsRef
                     .doc(ownerId)
                     .collection('userPosts')
                     .doc(postId)
                     .update({'likes.$currentUserId': false}),
+                removeLikeFromActivityFeed(),
                 setState(() {
                   likeCount -= 1;
                   isLiked = false;
@@ -228,12 +212,13 @@ class _PostState extends State<Post> {
               }
             else if (likes![currentUserId] == false)
               {
-                print("Liked"),
+                // print("Liked"),
                 postsRef
                     .doc(ownerId)
                     .collection('userPosts')
                     .doc(postId)
                     .update({'likes.$currentUserId': true}),
+                addLikeToActivityFeed(),
                 setState(() {
                   likeCount += 1;
                   isLiked = true;
@@ -269,6 +254,8 @@ class _PostState extends State<Post> {
   }
 
   buildPostFooter() {
+    bool isPostOwner = currentUserId == ownerId;
+
     return Column(
       children: <Widget>[
         Row(
@@ -281,12 +268,14 @@ class _PostState extends State<Post> {
                   {
                     if (likes![currentUserId] == true)
                       {
-                        print("DISLiked"),
+                        // print("DISLiked"),
                         postsRef
                             .doc(ownerId)
                             .collection('userPosts')
                             .doc(postId)
                             .update({'likes.$currentUserId': false}),
+                        removeLikeFromActivityFeed(),
+
                         setState(() {
                           likeCount -= 1;
                           isLiked = false;
@@ -295,12 +284,14 @@ class _PostState extends State<Post> {
                       }
                     else if (likes![currentUserId] == false)
                       {
-                        print("Liked"),
+                        // print("Liked"),
                         postsRef
                             .doc(ownerId)
                             .collection('userPosts')
                             .doc(postId)
                             .update({'likes.$currentUserId': true}),
+                        addLikeToActivityFeed(),
+
                         setState(() {
                           likeCount += 1;
                           isLiked = true;
@@ -332,14 +323,22 @@ class _PostState extends State<Post> {
               ),
             ),
             Padding(padding: EdgeInsets.only(right: 20.0)),
-            // GestureDetector(
-            //   onTap: () => print('showing comments'),
-            //   child: Icon(
-            //     Icons.chat,
-            //     size: 28.0,
-            //     color: Colors.blue[900],
-            //   ),
-            // ),
+            GestureDetector(
+              onTap: () => {
+                //TODO : to complete the func of request to save post
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  behavior: SnackBarBehavior.floating,
+                  content: Text("request to save sent !"),
+                ))
+              },
+              child: isPostOwner
+                  ? Text("")
+                  : Icon(
+                      Icons.save_alt,
+                      size: 28.0,
+                      color: Colors.blue,
+                    ),
+            ),
           ],
         ),
         Row(
@@ -382,9 +381,11 @@ class _PostState extends State<Post> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
+        Divider(),
         buildPostHeader(),
         buildPostImage(),
-        buildPostFooter()
+        buildPostFooter(),
+        Divider()
       ],
     );
   }

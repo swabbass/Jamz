@@ -11,7 +11,6 @@ import 'package:progressions/widgets/jam/CreateJamScreen.dart';
 import 'package:progressions/widgets/login/google_sign_in_button.dart';
 import 'package:progressions/widgets/pages/test_for_screenshot.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:progressions/widgets/pages/search.dart';
 
 // final usersRef = FirebaseFirestore.instance.collection('users');
 AppUser? currentUser;
@@ -83,7 +82,7 @@ class _TimelineState extends State<Timeline> {
           onPressed: () {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                  builder: (context) => TestForScreenshot(
+                  builder: (context) => CreateJamScreen(
                         user: _user,
                       )),
             );

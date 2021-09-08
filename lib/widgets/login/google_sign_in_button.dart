@@ -3,13 +3,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:progressions/models/user.dart';
 import 'package:progressions/models/authentication.dart';
 import 'package:progressions/widgets/pages/timeline.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final Reference storageRef = FirebaseStorage.instance.ref();
 final postsRef = FirebaseFirestore.instance.collection('posts');
+final activityFeedRef = FirebaseFirestore.instance.collection('feed');
+
+
+final savedRef = FirebaseFirestore.instance.collection('saved');
+
 final followersRef = FirebaseFirestore.instance.collection('followers');
 final followingRef = FirebaseFirestore.instance.collection('following');
 final timelineRef = FirebaseFirestore.instance.collection('timeline');

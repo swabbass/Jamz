@@ -140,7 +140,10 @@ class _SearchState extends State<Search> {
           child: Icon(Icons.add),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => CreateJamScreen()),
+              MaterialPageRoute(
+                  builder: (context) => CreateJamScreen(
+                        user: userOwner,
+                      )),
             );
           }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

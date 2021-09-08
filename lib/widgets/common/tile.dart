@@ -10,7 +10,8 @@ class Tile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => print('showing post'),
+      onTap: () => {},
+      // print('showing post'),
       child: cachedNetworkImage(post.mediaUrl),
     );
   }

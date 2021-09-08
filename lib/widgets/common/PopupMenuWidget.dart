@@ -27,7 +27,7 @@ class PopupMenu<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton<T>(
         onSelected: (T t) {
-          print("ffff $t");
+          // print("ffff $t");
           this._onSelected?.call(t, this._data.indexOf(t));
         },
         child: Card(

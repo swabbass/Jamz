@@ -4,7 +4,6 @@ import 'package:progressions/widgets/ScaleNoteWidget.dart';
 import 'package:progressions/models/ScaleSelection.dart';
 import 'package:provider/provider.dart';
 
-
 class ScaleNotesListView extends StatelessWidget {
   const ScaleNotesListView({Key? key}) : super(key: key);
 
@@ -13,8 +12,8 @@ class ScaleNotesListView extends StatelessWidget {
     return Consumer<SelectedScaleNotifier>(
       builder: (context, scaleSelection, child) {
         var selectedScale = scaleSelection.selectedScale;
-        print("cveveveveveevevevevev");
-        print(selectedScale.notes);
+        // print("cveveveveveevevevevev");
+        // print(selectedScale.notes);
         return Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,5 +27,4 @@ class ScaleNotesListView extends StatelessWidget {
       },
     );
   }
-  
 }

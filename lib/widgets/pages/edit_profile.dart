@@ -7,6 +7,7 @@ import 'package:progressions/models/user.dart';
 import 'package:progressions/widgets/common/progress.dart';
 import 'package:progressions/widgets/login/google_sign_in_button.dart';
 import 'package:progressions/widgets/login/sign_in_screen.dart';
+import 'package:progressions/widgets/pages/search.dart';
 import 'package:progressions/widgets/pages/user_profile.dart';
 
 class EditProfile extends StatefulWidget {
@@ -20,7 +21,7 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   bool _isSigningOut = false;
-
+  // late final String _currentUserId;
   // final _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController displayNameController = TextEditingController();
   TextEditingController bioController = TextEditingController();
@@ -32,6 +33,7 @@ class _EditProfileState extends State<EditProfile> {
   @override
   void initState() {
     super.initState();
+    // _currentUserId = widget.currentUserId;
     getUser();
   }
 
@@ -208,6 +210,10 @@ class _EditProfileState extends State<EditProfile> {
                             });
                             Navigator.of(context)
                                 .pushReplacement(_routeToSignInScreen());
+                            // Navigator.of(context).pushReplacement(
+                            //     MaterialPageRoute(
+                            //         builder: (BuildContext context) =>
+                            //             SignInScreen()));
                           },
                           icon: Icon(Icons.logout, color: Colors.red),
                           label: Text(

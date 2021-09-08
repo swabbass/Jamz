@@ -2,16 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:progressions/models/saved.dart';
 import 'package:progressions/models/user.dart';
 import 'package:progressions/widgets/common/header.dart';
 import 'package:progressions/widgets/common/progress.dart';
-import 'package:progressions/widgets/common/tile.dart';
 import 'package:progressions/widgets/jam/CreateJamScreen.dart';
 import 'package:progressions/widgets/login/google_sign_in_button.dart';
 import 'package:progressions/widgets/pages/edit_profile.dart';
 import 'package:progressions/widgets/common/bottom_navBar.dart';
 import 'package:progressions/widgets/common/post.dart';
-import 'package:progressions/widgets/pages/search.dart';
 import 'package:progressions/widgets/pages/timeline.dart';
 
 class UserProfile extends StatefulWidget {
@@ -36,6 +35,8 @@ class _UserProfileState extends State<UserProfile> {
   int postCount = 0;
   int savedCount = 0;
   List<Post> posts = [];
+  List<Saved> saved = [];
+
   String postToggle = "posts";
   int followerCount = 0;
   int followingCount = 0;
@@ -45,6 +46,7 @@ class _UserProfileState extends State<UserProfile> {
     _user = widget._user!;
     // currentUserId = currentUser!.id;
     getProfilePosts();
+    getProfileSaved();
     getFollowers();
     getFollowing();
     checkIfFollowing();
@@ -98,6 +100,23 @@ class _UserProfileState extends State<UserProfile> {
     });
   }
 
+  getProfileSaved() async {
+    setState(() {
+      isLoading = true;
+    });
+    QuerySnapshot snapshot = await savedRef
+        .doc(widget.profileId)
+        .collection('userSaved')
+        .orderBy('timestamp', descending: true)
+        .get();
+    setState(() {
+      isLoading = false;
+      savedCount = snapshot.docs.length;
+      saved = snapshot.docs.map((doc) => Saved.fromDocument(doc)).toList();
+      Saved.user = _user;
+    });
+  }
+
   // final String currentUserId = widget.userId;
   Column buildCountColumn(String label, int count) {
     return Column(
@@ -124,6 +143,12 @@ class _UserProfileState extends State<UserProfile> {
   }
 
   editProfile() {
+    // Navigator.of(context)
+    //     .pushReplacement(MaterialPageRoute(
+    //         builder: (BuildContext context) =>
+    //             EditProfile(currentUserId: currentUserId)))
+    //     .then((value) => setState(() {}));
+
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -138,11 +163,11 @@ class _UserProfileState extends State<UserProfile> {
 
   Container buildButton({String? text, VoidCallback? function}) {
     return Container(
-      padding: EdgeInsets.only(top: 2.0),
+      padding: EdgeInsets.only(top: 1.0),
       child: TextButton(
         onPressed: function,
         child: Container(
-          width: 250.0,
+          width: 230.0,
           height: 27.0,
           child: Text(
             text!,
@@ -295,6 +320,7 @@ class _UserProfileState extends State<UserProfile> {
   }
 
   buildProflePosts() {
+    bool isProfileOwner = widget.profileId == currentUserId;
     if (isLoading) {
       return circularProgress();
     } else if (postToggle == "posts") {
@@ -303,9 +329,10 @@ class _UserProfileState extends State<UserProfile> {
       );
     } else if (postToggle == "saved") {
       //TODO: Show List of saved work from jam screen (file + image + timestamp + Title)
+
       return Column(
-          // children: posts,
-          );
+        children: isProfileOwner ? saved : [],
+      );
     }
   }
 
@@ -316,6 +343,8 @@ class _UserProfileState extends State<UserProfile> {
   }
 
   buildToggle() {
+    bool isProfileOwner = widget.profileId == currentUserId;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
@@ -345,11 +374,12 @@ class _UserProfileState extends State<UserProfile> {
             Row(
               children: <Widget>[
                 IconButton(
-                  icon: Icon(Icons.archive_outlined),
-                  color:
-                      postToggle == "saved" ? Color(0xFFb71c1c) : Colors.grey,
-                  onPressed: () => setToggle("saved"),
-                ),
+                    icon: Icon(Icons.archive_outlined),
+                    color:
+                        postToggle == "saved" ? Color(0xFFb71c1c) : Colors.grey,
+                    onPressed: () => isProfileOwner
+                        ? setToggle("saved")
+                        : setToggle("posts")),
                 Text(
                   "Saved " + savedCount.toString(),
                   style: TextStyle(
@@ -385,7 +415,10 @@ class _UserProfileState extends State<UserProfile> {
           child: Icon(Icons.add),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => CreateJamScreen()),
+              MaterialPageRoute(
+                  builder: (context) => CreateJamScreen(
+                        user: _user,
+                      )),
             );
           }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

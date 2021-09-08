@@ -31,7 +31,7 @@ class SelectedScaleNotifier with ChangeNotifier {
       this._selectedMode = value;
       notifyListeners();
     } else {
-      print("no notify");
+      // print("no notify");
     }
   }
 
@@ -41,15 +41,15 @@ class SelectedScaleNotifier with ChangeNotifier {
       this._selectedKey = value;
       notifyListeners();
     } else {
-      print("no notify");
+      // print("no notify");
     }
   }
 
   set sharps(bool value) {
-    if(value){
-      NOTES_NAMES= NOTES_NAMES_SHARPS;
-    }else{
-      NOTES_NAMES= NOTES_NAMES_FLATS;
+    if (value) {
+      NOTES_NAMES = NOTES_NAMES_SHARPS;
+    } else {
+      NOTES_NAMES = NOTES_NAMES_FLATS;
     }
     _sharps = value;
     this._selectedScale = Scale(_selectedMode, _selectedKey);

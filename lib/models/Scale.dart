@@ -19,12 +19,16 @@ class Scale {
   Scale(this.mode, this.key) {
     this.intervals = getIntervalsByMode(mode!.type);
     this.notes = _generateNotesForScale();
-    final notesWithoutOctave = this.notes!.sublist(0,this.notes!.length-1);
-    print(notesWithoutOctave);
+    final notesWithoutOctave = this.notes!.sublist(0, this.notes!.length - 1);
+    // print(notesWithoutOctave);
     this.chords = UnmodifiableListView<Chord>(notesWithoutOctave.map((e) {
       final index = notesWithoutOctave.indexOf(e);
-      return Chord(TonicTriad(notesWithoutOctave[index], notesWithoutOctave[(index+2)%notesWithoutOctave.length],
-          notesWithoutOctave[(index+4)%notesWithoutOctave.length]), e!);
+      return Chord(
+          TonicTriad(
+              notesWithoutOctave[index],
+              notesWithoutOctave[(index + 2) % notesWithoutOctave.length],
+              notesWithoutOctave[(index + 4) % notesWithoutOctave.length]),
+          e!);
     }));
   }
 
@@ -39,6 +43,4 @@ class Scale {
     }
     return UnmodifiableListView(res);
   }
-
-
 }

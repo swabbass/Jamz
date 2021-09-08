@@ -31,7 +31,13 @@ def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
-android {
+//    def keystoreProperties = new Properties()
+//    def keystorePropertiesFile = rootProject.file('key.properties')
+//    if (keystorePropertiesFile.exists()) {
+//        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+//    }
+
+   android {
     compileSdkVersion 28
 
     sourceSets {
@@ -74,7 +80,7 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation platform('com.google.firebase:firebase-bom:27.1.0')
-    implementation 'androidx.multidex:multidex: 2.0.1'
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     // implementation 'com.facebook.android:facebook-login:[8.1)'
 }
